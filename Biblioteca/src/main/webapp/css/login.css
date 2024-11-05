@@ -1,15 +1,22 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
+    background-color: #4CAF50;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
 }
 
 .container {
-    width: 80%;
+    width: 70%;
+    height: 70%;
     margin: 0 auto;
     padding: 20px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #4CAF50;
+    display: grid;
+    align-items: center;
+    align-content: stretch;
 }
 
 img {
@@ -36,7 +43,7 @@ img {
 
 .button {
     display: block;
-    width: 10%;
+    width: 30%;
     background-color: #4CAF50;
     color: white;
     padding: 14px 20px;
@@ -169,8 +176,6 @@ select {
     width: 100%;
 }
 
-
-
 .form-cpf {
     display: flex;
     flex-direction: row;
@@ -190,41 +195,18 @@ select {
     width: 50%;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
-}
-
-.container {
-    width: 80%;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.title {
-    text-align: center;
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
 .form-login {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 60%;
+    width: 70%;
     margin: 0 auto;
     padding: 20px;
     background-color: #fff;
     border: 1px solid #ddd;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-label {
-    margin-bottom: 5px;
-    font-weight: bold;
+    height: 60%;
+    justify-content: space-evenly;
 }
 
 input[type="text"],
@@ -236,26 +218,27 @@ input[type="password"] {
     width: 100%;
 }
 
-.painel{
-	display: flex;
-	gap: 1%;
-}
-.aniversario, .livros{
-	background-color: #dff0d8;
-	color: #3c763d;
-	width: 50%;
-	border-radius: 5px;
-	padding: 10px;
+.painel {
+    display: flex;
+    gap: 1%;
 }
 
-.login{
-	justify-content: right;
+.aniversario,
+.livros {
+    background-color: #dff0d8;
+    color: #3c763d;
+    width: 50%;
+    border-radius: 5px;
+    padding: 10px;
 }
 
-.balao-img{
-	margin-top: -30%;
-	justify-content: right;
-	box-shadow: none;
-	margin-left: 77%;
-	height: 90%;
+.login {
+    justify-content: center;
+}
+
+.balao-img {
+    justify-content: center;
+    box-shadow: none;
+    margin-left: auto;
+    margin-right: auto;
 }

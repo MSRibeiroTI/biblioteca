@@ -1,28 +1,47 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>Biblioteca</title>
-	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<title>Login - Biblioteca</title>
+	<link rel="stylesheet" type="text/css" href="css/login.css">
 </head>
+
 <body>
-	
+
 	<div class="container">
-	<div class="img">
-		<img src="img/imagem.jpg">
-	</div>
-		<h1 class="title">Bem-vindo a Biblioteca</h1>
-		<p class="description">Sistema de controle da Biblioteca de Alexandria</p>
-		<p class="description">Para começar, escolha um link abaixo:</p>
-		<div class="btn-index">
-		<a class="button" href="produtos">Clientes</a>
-		<a class="button" href="sistemas">Funcionários</a>
-		<a class="button" href="servicos">Livros</a>
-		<a class="button" href="emprestar">Emprestar</a>
+		
+		
+		<form action="login" method="post" class="form-login">
+		<h1 class="title">Biblioteca Odete Almeida Roitman</h1>
+		<h3>FaÃ§a Login:</h3>
+		<div class="login">
+			<div>
+				<label for="username">CPF:</label>
+				<input type="text" id="username" name="username" required>
+			</div>
+			<div>
+				<label for="password">Senha:</label>
+				<input type="password" id="password" name="password" required>
+			</div>
 		</div>
+			<c:if test="${not empty mensagem}">
+                <div class="alert alert-success"
+                    style="background-color: #dff0d8; border: 1px solid #d6e9c6; color: red; padding: 10px; border-radius: 4px;">
+                    ${mensagem}
+                </div>
+            </c:if>
+			<input class="button" type="submit" value="Entrar">
+		</form>
+		
 	</div>
 	<footer>
-	<p>© 2024 Loja 2. Todos os direitos reservados. Desenvolvido por Marcelo S Ribeiro - marcelocaricatus@hotmail.com</p>
-</footer>
+		<p>Ã‚Â© 2024 Biblioteca. Todos os direitos reservados. Desenvolvido por Marcelo S Ribeiro -
+			marcelocaricatus@hotmail.com</p>
+	</footer>
 </body>
-</html>
 
+</html>
