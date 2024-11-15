@@ -1,11 +1,13 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>P·gina de Erro</title>
+    <title>P√°gina de Erro</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -52,12 +54,17 @@
         }
     </style>
 </head>
-
+ <c:if test="${not empty mensagem}">
+                <div class="alert alert-success"
+                    style="background-color: #dff0d8; border: 1px solid #d6e9c6; color: #3c763d; padding: 10px; border-radius: 4px;">
+                    ${mensagem}
+                </div>
+</c:if>
 <body>
     <div class="error-container">
         <h1>Erro</h1>
         <p>Ocorreu um erro inesperado. Por favor, tente novamente mais tarde.</p>
-        <a href="home">Voltar para a p·gina inicial</a>
+        <a href="home">Voltar para a p√°gina inicial</a>
     </div>
 </body>
 

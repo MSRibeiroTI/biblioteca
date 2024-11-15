@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.biblioteca.model.Clientes;
+import com.biblioteca.model.Emprestimos;
 import com.biblioteca.model.Funcionarios;
 
 import jakarta.servlet.RequestDispatcher;
@@ -41,11 +42,19 @@ public class HomeServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		List<Emprestimos> emprestimos = null;
+		try {
+			emprestimos = Emprestimos.listarLivrosAtrasados();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
         request.setAttribute("niver_func", niver_func);
         request.setAttribute("niver_cli", niver_cli);
         request.setAttribute("data",
                 java.time.LocalDate.now().format(java.time.format.DateTimeFormatter.ofPattern("dd 'de' MMMM 'de' yyyy")));
+		request.setAttribute("emprestimos", emprestimos);
     	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/home.jsp");
         dispatcher.forward(request, response);
     }

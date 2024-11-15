@@ -6,7 +6,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.biblioteca.model.Clientes;
+import com.biblioteca.model.Emprestimos;
 import com.biblioteca.model.Funcionarios;
+import com.biblioteca.model.LogGenerator;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -40,7 +42,10 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("usuario", funcionario.getNome());
                 session.setAttribute("id_func", funcionario.getId_funcionario());
                 session.setAttribute("funcao", funcionario.getFuncao());
+                LogGenerator.generateLog("Usuário logado: " + funcionario.getNome());
                 request.setAttribute("mensagem", "Bem-vindo " + funcionario.getNome());
+                List<Emprestimos> emprestimos = Emprestimos.listarLivrosAtrasados();
+                request.setAttribute("emprestimos", emprestimos);
                 List<Clientes> niver_cli = Clientes.Niver();
                 request.setAttribute("niver_cli", niver_cli);
                 List<Funcionarios> niver_func = Funcionarios.Niver();
@@ -48,12 +53,14 @@ public class LoginServlet extends HttpServlet {
                 request.setAttribute("data",
                         java.time.LocalDate.now()
                                 .format(java.time.format.DateTimeFormatter.ofPattern("dd 'de' MMMM 'de' yyyy")));
+                                
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/home.jsp");
                 dispatcher.forward(request, response);
             } else {
                 request.setAttribute("mensagem", "Usuário ou senha inválidos.");
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/");
                 dispatcher.forward(request, response);
+                LogGenerator.generateLog("Usuário ou senha inválidos.");
             }
         } catch (NoSuchAlgorithmException | IOException | SQLException | ServletException e) {
             e.printStackTrace();

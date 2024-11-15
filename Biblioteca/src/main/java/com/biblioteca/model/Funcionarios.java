@@ -179,6 +179,7 @@ public class Funcionarios {
                 funcionario.setNome(rs.getString("nome"));
                 funcionario.setCpf(rs.getString("cpf"));
                 funcionario.setSenha(rs.getString("senha"));
+                funcionario.setFuncao(rs.getString("funcao"));
 
                 return funcionario;
             }
@@ -196,7 +197,7 @@ public class Funcionarios {
 
         try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("SELECT * FROM funcionario");
+                    .prepareStatement("SELECT * FROM funcionario order by nome ASC");
 
             ResultSet rs = preparedStatement.executeQuery();
 
@@ -236,7 +237,7 @@ public class Funcionarios {
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement(
-                            "SELECT * FROM funcionario WHERE MONTH(data_nascimento) = ? AND DAY(data_nascimento) = ?");
+                            "SELECT nome FROM funcionario WHERE MONTH(data_nascimento) = ? AND DAY(data_nascimento) = ? order by nome ASC");
             preparedStatement.setInt(1, mes);
             preparedStatement.setInt(2, dia);
             ResultSet rs = preparedStatement.executeQuery();
@@ -402,6 +403,24 @@ public class Funcionarios {
         }
 
         return ("Funcionário atualizado com sucesso!");
+    }
+    
+    public static void deletar(int id_func) throws IOException, SQLException {
+    	Connection connection = Conexao.conect();
+		try {
+			PreparedStatement preparedStatement = connection
+					.prepareStatement("DELETE FROM funcionario WHERE id_funcionario = ?");
+			preparedStatement.setInt(1, id_func);
+			preparedStatement.executeUpdate();
+			LogGenerator.generateLog("Funcionário deletado com sucesso! - " + id_func);
+		} catch (SQLException e) {
+			LogGenerator.generateLog(id_func + e.getMessage());
+			System.out.println(e);
+		} finally {
+			connection.close();
+		}
+    	
+    	
     }
 
 }

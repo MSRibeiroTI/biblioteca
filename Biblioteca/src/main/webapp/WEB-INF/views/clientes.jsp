@@ -8,6 +8,7 @@
 
         <head>
             <meta charset="UTF-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Clientes</title>
             <link rel="stylesheet" type="text/css" href="css/style.css">
         </head>
@@ -27,7 +28,6 @@
             <div class="tb">
                 <table border="1">
                     <tr>
-                        <th>ID</th>
                         <th>Nome</th>
                         <th>Telefone</th>
                         <th>Referências</th>
@@ -35,14 +35,17 @@
                     </tr>
                     <c:forEach items="${lista}" var="cliente">
                         <tr>
-                            <td>${cliente.id_cliente}</td>
                             <td>${cliente.nome}</td>
                             <td>${cliente.telefone}</td>
                             <td>${cliente.referencias}</td>
                             <td>
                                 <a href="cliente?action=editar_cliente&id_cliente=${cliente.id_cliente}">Editar</a>
-                                <a href="cliente?action=deletar&id_cliente=${cliente.id_cliente}">Excluir</a>
+                                <c:if test="${sessionScope.funcao eq 'Gerente'}">
+                                <a href="cliente?action=deletar&id_cliente=${cliente.id_cliente}"
+                                onclick="return confirm('Tem certeza que deseja excluir este cliente?');">Excluir</a>
+                                </c:if>
                             </td>
+          
                         </tr>
                     </c:forEach>
 

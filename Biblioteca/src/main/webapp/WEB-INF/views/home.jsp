@@ -1,10 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 		<%@ include file="/WEB-INF/views/header.jsp" %>
 			<!DOCTYPE html>
 			<html>
 
 			<head>
+			 <meta charset="UTF-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
 				<title>Biblioteca</title>
 				<link rel="stylesheet" type="text/css" href="css/style.css">
 			</head>
@@ -27,8 +31,13 @@
 					<div class="btn-index">
 						<a class="button" href="clientes">Clientes</a>
 						<a class="button" href="funcionarios?action=listar">Funcionários</a>
-						<a class="button" href="servicos">Livros</a>
-						<a class="button" href="emprestar">Empréstimos</a>
+						<a class="button" href="livros?action=listar">Livros</a>
+						<a class="button" href="emprestimos?action=listar">Empréstimos</a>
+							<c:choose>
+								<c:when test="${sessionScope.funcao eq 'Gerente' or sessionScope.funcao eq 'Caixa'}">
+									<a class="button" href="">Receber Multa</a>
+								</c:when>
+							</c:choose>
 						<a class="button" href="logout">Sair</a>
 					</div>
 				</div>
@@ -54,6 +63,11 @@
 						</div>
 						<div class="livros">
 							<h3>Livros Atrasados:</h3>
+
+							<c:forEach items="${emprestimos}" var="livro">
+								<p>${livro.titulo} - ${livro.cliente} - ${livro.data_devolucao}</p>
+							</c:forEach>
+
 						</div>
 					</div>
 				</div>

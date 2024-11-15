@@ -98,8 +98,7 @@ public class funcServlet extends HttpServlet {
 					}
 
 					String mensagem = Funcionarios.cadastrar(nome, cpf, telefone, cargo, nascimento, admissao, senha,
-							rua, numero, cep, bairro,
-							cidade, estado);
+							rua, numero, cep, bairro, cidade, estado);
 
 					request.setAttribute("mensagem", mensagem);
 					page = "/WEB-INF/views/funcionarios/novo.jsp";
@@ -113,7 +112,12 @@ public class funcServlet extends HttpServlet {
 					break;
 
 				case "deletar":
-
+					
+					int funcIdInteger = Integer.parseInt(request.getParameter("id_funcionario"));
+					Funcionarios.deletar(funcIdInteger);
+					request.setAttribute("mensagem", "Funcionário deletado com sucesso!");
+					List<Funcionarios> lista1 = Funcionarios.listarTodos();
+					request.setAttribute("lista", lista1);
 					page = "/WEB-INF/views/funcionarios/funcionarios.jsp";
 					break;
 
@@ -133,7 +137,14 @@ public class funcServlet extends HttpServlet {
 
 					Integer id = Integer.parseInt(request.getParameter("id_funcionario"));
 					Integer id2 = Integer.parseInt(request.getParameter("id_endereco"));
-
+					
+					if (nome1.isEmpty() || telefone1.isEmpty() || cargo1.isEmpty() || senha1.isEmpty()
+							|| nascimento1.isEmpty() || admissao1.isEmpty() || rua1.isEmpty() || bairro1.isEmpty()
+							|| cep1.isEmpty() || estado1.isEmpty() || cidade1.isEmpty() || numero1.isEmpty()) {
+						request.setAttribute("mensagem", "Todos os campos devem ser preenchidos!");
+						page = "/WEB-INF/views/clientes/error.jsp";
+						break;
+					}
 					String mensagem1 = Funcionarios.updateFunc(id, nome1, telefone1, cargo1, nascimento1,
 							admissao1, senha1, rua1, numero1, cep1, bairro1,
 							cidade1, estado1, id2);

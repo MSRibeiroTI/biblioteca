@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Date;
 
 public class LogGenerator {
     private static LogGenerator instance; // Instância única no padrão singleton
@@ -40,7 +41,7 @@ public class LogGenerator {
         FileWriter fw = new FileWriter(log, true);  //
         BufferedWriter bw = new BufferedWriter(fw);
 
-        bw.write(message);
+        bw.write(Date.from(java.time.Instant.now()) + ": " + message);
         bw.newLine();
 
         bw.close();

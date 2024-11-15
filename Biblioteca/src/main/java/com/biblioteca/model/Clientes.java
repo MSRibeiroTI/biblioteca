@@ -151,7 +151,7 @@ public class Clientes {
 		Connection connection = Conexao.conect();
 
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM client");
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM client order by nome ASC");
 
 			ResultSet rs = preparedStatement.executeQuery();
 
@@ -173,35 +173,36 @@ public class Clientes {
 
 		return clientesList;
 	}
-	
+
 	public static List<Clientes> Niver() throws SQLException, IOException {
 		Calendar calendar = Calendar.getInstance();
 		int mes = calendar.get(Calendar.MONTH) + 1;
 		int dia = calendar.get(Calendar.DAY_OF_MONTH);
-	
+
 		List<Clientes> clientesList = new ArrayList<>();
-	
+
 		Connection connection = Conexao.conect();
-	
+
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM client WHERE MONTH(data_nascimento) = ? AND DAY(data_nascimento) = ?");
+			PreparedStatement preparedStatement = connection.prepareStatement(
+					"SELECT nome FROM client WHERE MONTH(data_nascimento) = ? AND DAY(data_nascimento) = ? order by nome ASC");
 			preparedStatement.setInt(1, mes);
 			preparedStatement.setInt(2, dia);
-	
+
 			ResultSet rs = preparedStatement.executeQuery();
-	
+
 			while (rs.next()) {
 				Clientes cliente = new Clientes();
 				cliente.setNome(rs.getString("nome"));
 				clientesList.add(cliente);
 			}
-	
+
 		} catch (SQLException e) {
 			System.out.println(e);
 		} finally {
 			connection.close();
 		}
-	
+
 		return clientesList;
 	}
 
@@ -346,5 +347,28 @@ public class Clientes {
 		} finally {
 			connection.close();
 		}
+	}
+
+	public static List<Clientes> getClientes() throws IOException, SQLException {
+		List<Clientes> clientesList = new ArrayList<>();
+		Connection connection = Conexao.conect();
+		try {
+			PreparedStatement preparedStatement = connection
+					.prepareStatement(
+							"SELECT c.* FROM client c LEFT JOIN multa m ON c.id_cliente = m.id_client WHERE m.id IS NULL or m.status = '0' order by c.nome ASC");
+
+			ResultSet rs = preparedStatement.executeQuery();
+			while (rs.next()) {
+				Clientes cliente = new Clientes();
+				cliente.setId_cliente(rs.getInt("id_cliente"));
+				cliente.setNome(rs.getString("nome"));
+				clientesList.add(cliente);
+			}
+		} catch (SQLException e) {
+			System.out.println(e);
+		} finally {
+			connection.close();
+		}
+		return clientesList;
 	}
 }

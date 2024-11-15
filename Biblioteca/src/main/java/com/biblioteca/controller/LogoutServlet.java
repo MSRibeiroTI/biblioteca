@@ -2,6 +2,8 @@ package com.biblioteca.controller;
 
 import java.io.IOException;
 
+import com.biblioteca.model.LogGenerator;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -16,8 +18,12 @@ public class LogoutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        session.invalidate();
+    	        HttpSession session = request.getSession(false);
+        if (session != null) {
+            LogGenerator.generateLog("Usuário fez logout: " + session.getAttribute("usuario"));
+            session.invalidate();
+        }
+        
         response.sendRedirect(request.getContextPath() + "/");
     }
 
