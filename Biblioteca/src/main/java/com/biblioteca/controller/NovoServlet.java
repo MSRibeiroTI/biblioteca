@@ -2,6 +2,8 @@ package com.biblioteca.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
+
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -9,6 +11,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import com.biblioteca.model.Clientes;
+import com.biblioteca.model.Emprestimos;
+import com.biblioteca.model.Funcionarios;
 import com.biblioteca.model.LogGenerator;
 
 @WebServlet("/cliente")
@@ -21,7 +25,6 @@ public class NovoServlet extends HttpServlet {
 		try {
 			processRequest(request, response);
 		} catch (ServletException | IOException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			LogGenerator.generateLog(e.getMessage());
 		}
@@ -33,7 +36,6 @@ public class NovoServlet extends HttpServlet {
 		try {
 			processRequest(request, response);
 		} catch (ServletException | IOException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			LogGenerator.generateLog(e.getMessage());
 		}
@@ -82,6 +84,16 @@ public class NovoServlet extends HttpServlet {
 					request.setAttribute("mensagem", "Cliente deletado com sucesso!");
 					page = "clientes";
 					break;
+				
+				case "abrir":
+					int clienteId1 = Integer.parseInt(request.getParameter("id_cliente"));
+					Clientes cliente1 = Clientes.getClienteById(clienteId1);
+					request.setAttribute("cliente", cliente1);
+					List<Emprestimos> historico = Emprestimos.listarHistorico(clienteId1);
+					request.setAttribute("historico", historico);
+					page = "/WEB-INF/views/clientes/abrir_cliente.jsp";
+					break;
+			
 
 				default:
 					page = "/WEB-INF/views/clientes/error.jsp";

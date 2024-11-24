@@ -7,6 +7,7 @@ $(document).ready(function () {
     $("#telefone").mask("(99) 9.9999-9999");
 });
 
+
 function validarCPF(cpf) {
     cpf = cpf.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
     if (!isCPF(cpf)) {

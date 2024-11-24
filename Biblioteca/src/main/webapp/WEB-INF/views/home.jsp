@@ -35,7 +35,7 @@
 						<a class="button" href="emprestimos?action=listar">Empréstimos</a>
 							<c:choose>
 								<c:when test="${sessionScope.funcao eq 'Gerente' or sessionScope.funcao eq 'Caixa'}">
-									<a class="button" href="">Receber Multa</a>
+									<a class="button" href="emprestimos?action=receber_multa">Receber Multa</a>
 								</c:when>
 							</c:choose>
 						<a class="button" href="logout">Sair</a>

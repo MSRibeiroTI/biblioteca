@@ -113,6 +113,10 @@ public class LivroServlet extends HttpServlet {
 				out.print(jsonObject.toString());
 			}
 				out.flush(); break;
+				
+				default:
+					page = "/WEB-INF/views/clientes/error.jsp";
+					break;
 				}
 		
 		} catch (Exception e) {

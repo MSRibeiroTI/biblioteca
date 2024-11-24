@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.oracle.wls.shaded.org.apache.regexp.recompile;
+
 public class Emprestimos {
     private int id;
     private int id_livro;
@@ -205,7 +207,32 @@ public class Emprestimos {
         }
         return livrosEncontrados;
     }
-
+    
+    public static List<Emprestimos> listarHistorico(int id) throws SQLException, IOException{
+    	List<Emprestimos> historicoEmprestimos = new ArrayList<Emprestimos>();
+    	Connection connection = Conexao.conect();
+    	try {
+    		String sql = "SELECT e.*, c.nome as cliente, b.titulo FROM emprestimo e JOIN client c on e.id_cliente = c.id_cliente JOIN books b on e.id_livro = b.id_livro WHERE c.id_cliente = ? ORDER BY data_devolucao DESC";
+    		
+    		PreparedStatement preparedStatement = connection.prepareStatement(sql);
+    		preparedStatement.setInt(1, id);
+    		ResultSet rs = preparedStatement.executeQuery();
+    		while (rs.next()) {
+    			Emprestimos emprestimo= new Emprestimos();
+    			emprestimo.setTitulo(rs.getString("titulo"));
+    			emprestimo.setData_devolucao(rs.getString("data_devolucao"));
+    			emprestimo.setStatus(rs.getString("status"));
+    			historicoEmprestimos.add(emprestimo);
+    		}
+    	} catch (SQLException e) {
+            LogGenerator.generateLog(e.getMessage());
+        } finally {
+            connection.close();
+        }
+    	
+    	return historicoEmprestimos; 
+    }
+    
 }
 
 

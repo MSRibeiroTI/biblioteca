@@ -39,6 +39,7 @@
                             <td>${cliente.telefone}</td>
                             <td>${cliente.referencias}</td>
                             <td>
+                            	<a href="cliente?action=abrir&id_cliente=${cliente.id_cliente}">Abrir</a>
                                 <a href="cliente?action=editar_cliente&id_cliente=${cliente.id_cliente}">Editar</a>
                                 <c:if test="${sessionScope.funcao eq 'Gerente'}">
                                 <a href="cliente?action=deletar&id_cliente=${cliente.id_cliente}"
