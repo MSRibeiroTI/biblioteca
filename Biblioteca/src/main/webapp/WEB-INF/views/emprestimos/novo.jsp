@@ -25,7 +25,7 @@
                         style="background-color: #dff0d8; border: 1px solid #d6e9c6; color: #3c763d; padding: 10px; border-radius: 4px;">
                         ${mensagem} </div>
                 </c:if>
-                <div class="btn-index"> <a class="button" href="emprestimos?action=listar">Voltar</a> </div>
+
 
                 <form id="emprestimoForm" action="emprestimos" method="post">
                     <input type="hidden" name="action" value="salvar">
@@ -34,7 +34,9 @@
                         placeholder="Digite o nome ou id do livro">
                     <input type="hidden" name="livroId" value="" id="livroId">
                     <input id="livroNome" type="text" value="" disabled>
-                    <button type="button" class="button" id="btnAdicionarLivro">Adicionar</button>
+                    <div class="btn-index">
+                        <button type="button" class="button" id="btnAdicionarLivro">Adicionar</button>
+                    </div><br>
                     <div id="livrosAdicionados"></div>
                     <div id="livrosAdicionadosId"></div>
                     <br>
@@ -45,18 +47,23 @@
                             <option value="${cliente.id_cliente}">${cliente.nome}</option>
                         </c:forEach>
                     </select>
+                    <br><br>
+                    <div class="data">
+                        <label for="dataEmprestimo">Data de Emprestimo:</label><br>
+                        <input type="date" name="dataEmprestimo" id="dataEmprestimo"
+                            value="<%= java.time.LocalDate.now() %>" required>
+                        <br>
+                        <label for="dataDevolucao">Data de Devolucao:</label><br>
+                        <input type="date" name="dataDevolucao" id="dataDevolucao"
+                            value="<%= java.time.LocalDate.now().plusDays(3) %>" required>
+                    </div>
                     <br>
-                    <label for="dataEmprestimo">Data de Emprestimo:</label>
-                    <input type="date" name="dataEmprestimo" id="dataEmprestimo" required>
-                    <br>
-                    <label for="dataDevolucao">Data de Devolucao:</label>
-                    <input type="date" name="dataDevolucao" id="dataDevolucao" required>
-                    <br>
-                <div class="btn-index">
-                    <input type="submit" id="submit" value="Salvar">
+
+                    <div class="btn-index">
+                        <input type="submit" id="submit" value="Salvar">
                     </div>
                 </form>
-
+                <div class="btn-index"> <a class="button" href="emprestimos?action=listar">Voltar</a> </div>
                 <script>
                     let livrosAdicionados = [];
                     let livrosAdicionadosId = [];

@@ -30,7 +30,7 @@
                         <tr>
                             <th>Nome</th>
                             <th>Telefone</th>
-                            <th>Referências</th>
+                            <th>Função</th>
                             <th>Opções</th>
                         </tr>
                         <c:forEach items="${lista}" var="funcionarios">

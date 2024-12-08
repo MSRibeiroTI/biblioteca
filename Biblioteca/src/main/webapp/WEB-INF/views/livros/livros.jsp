@@ -24,6 +24,7 @@
                 <div class="btn-index">
                     <a class="button" href="home">Voltar</a>
                     <a class="button" href="livros?action=novo">Cadastrar</a>
+                    <a class="button" href="emprestimos?action=novo">Novo Empréstimo</a>
                 </div>
                 <div class="tb">
                     <table border="1">

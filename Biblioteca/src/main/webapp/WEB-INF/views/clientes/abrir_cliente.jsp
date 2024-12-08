@@ -21,7 +21,7 @@
             
             <form action="cliente?action=atualizar_cliente" method="post"
                 style="display: flex; flex-direction: column; align-items: center;">
-                <h1>Editar Cliente</h1>
+                <h1>Cliente</h1>
                 <div class="form-group">
                     <input type="hidden" name="id_cliente" value="${cliente.id_cliente}">
                     <input type="hidden" name="id_endereco" value="${cliente.id_endereco}">

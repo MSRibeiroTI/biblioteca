@@ -28,10 +28,8 @@
                 <div class="tb">
                     <table border="1">
                         <tr>
-                            <th>Id</th>
                             <th>Código</th>
                             <th>Título</th>
-                            <th>Id Cliente</th>
                             <th>Cliente</th>
                             <th>Data Empréstimo</th>
                             <th>Devolução</th>
@@ -41,10 +39,8 @@
                         </tr>
                        <c:forEach var="emprestimo" items="${lista}" varStatus="status">
 					    <tr>
-					        <td>${emprestimo.id}</td>
 					        <td>${emprestimo.id_livro}</td>
 					        <td>${emprestimo.titulo}</td>
-					        <td>${emprestimo.id_cliente}</td>
 					        <td>${emprestimo.cliente}</td>
 					        <td>${emprestimo.data_emprestimo}</td>
 					        <td>${emprestimo.data_devolucao}</td>

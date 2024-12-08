@@ -355,7 +355,7 @@ public class Clientes {
 		try {
 			PreparedStatement preparedStatement = connection
 					.prepareStatement(
-							"SELECT c.* FROM client c LEFT JOIN multa m ON c.id_cliente = m.id_client WHERE m.id IS NULL or m.status = '0' order by c.nome ASC");
+							"SELECT DISTINCT c.* FROM client c LEFT JOIN multa m ON c.id_cliente = m.id_client WHERE m.id IS NULL OR m.status = '0' ORDER BY c.nome ASC;");
 
 			ResultSet rs = preparedStatement.executeQuery();
 			while (rs.next()) {
